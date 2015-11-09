@@ -16,6 +16,21 @@ export default class Board {
     return this.squares[square].render()
   }
 
+  getPlayer (board) {
+    let moves = 9 -
+      document.getElementById('board').querySelectorAll('.empty').length
+
+    return (moves % 2 === 0) ? 'x' : 'o'
+  }
+
+  move (oldSquare) {
+    let boardElem = oldSquare.parentElement
+    let square = Array.prototype.indexOf.call(boardElem.children, oldSquare)
+    let newSquare = this.playSquare(square, this.getPlayer())
+
+    boardElem.replaceChild(newSquare, oldSquare)
+  }
+
   render () {
     let div = document.createElement('div')
 
