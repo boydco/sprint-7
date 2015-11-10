@@ -1,0 +1,4 @@
+Cognitive load is the idea that brains only have so much bandwidth to process information and it's a limited resource so designers and developers must work within the constraints when designing websites.
+
+The biggest thing when designing a website is to make the intrinsic cognitive load easy to focus on and obvious
+so the attention is diverted there. Then you want to eliminate all the extraneous cognitive load of redundant links, irrelevent text or images, and if possible cut down any simple tasks for the user that might cause a momentary road block, because a lot of tiny road blocks can end up being a disruption in the user experience and lead to cognitive strain and a bad user experience.
