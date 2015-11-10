@@ -17,7 +17,9 @@ export default class App {
   }
 
   move (e) {
-    this.board.move(e.target)
+    if (this.board.move(e.target)) {
+      console.log('We have a winner!')
+    }
   }
 
   newGame () {
