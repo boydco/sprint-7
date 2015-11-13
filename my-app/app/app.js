@@ -9,21 +9,25 @@ export default class App {
     this.board = board
   }
 
-  getPlayer (board) {
-    let moves = 9 -
-      document.getElementById('board').querySelectorAll('.empty').length
-
-    return (moves % 2 === 0) ? 'x' : 'o'
-  }
-
   move (e) {
-    if (this.board.move(e.target)) {
-      console.log('We have a winner!')
+    let winMessage = this.board.move(e.target)
+
+    if (winMessage) {
+      let div = document.createElement('div')
+
+      div.className = 'game-over'
+      div.innerText = winMessage
+      document.body.appendChild(div)
+
+      document.getElementById('board')
+        .removeEventListener('click', this.boundMove, false)
+      delete this.boundMove
     }
   }
 
   newGame () {
     this.board = new Board()
+    this.boundMove = this.move.bind(this)
 
     document.body.appendChild(this.board.render())
 

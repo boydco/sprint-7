@@ -1,6 +1,7 @@
 .board {
   border: 1px solid #eee;
   margin: 50px auto;
+  margin-bottom: 30px;
   width: 300px;
 } 
  
@@ -24,6 +25,20 @@
 .player-o { color: ForestGreen; }
 .player-x { color: DarkRed; }
 
-h1, p {
+h1, 
+p {
   text-align: center;
+}
+
+.game-over {
+  background-color: black;
+  border-radius: 8%;
+  clear: both;
+  color: #fff;
+  font-size: 8rem;
+  font-weight: bold;
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
+  width: 40%;
 }

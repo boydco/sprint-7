@@ -4,20 +4,17 @@
 
 import Square from './square'
 
-/*var wins = [
-[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
-    [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
-]*/
+const WIN_PATTERNS = [
+  'xxx......', '...xxx...', '......xxx',
+  'x..x..x..', '.x..x..x.', '..x..x..x',
+  'x...x...x', '..x.x.x..'
+].join('|')
 
 export default class Board {
   constructor () {
     this.squares = new Array(9).fill(null).map(() => {
       return new Square()
     })
-  }
-
-  checkForWin (wins) {
-    return true
   }
 
   playSquare (square, mark) {
@@ -32,13 +29,34 @@ export default class Board {
     return (moves % 2 === 0) ? 'x' : 'o'
   }
 
+checkForWin (player, pattern) {
+  let winPatterns =
+      player === 'x' ? WIN_PATTERNS : WIN_PATTERNS.replace(/x/ig, 'o')
+  let re = new RegExp(winPatterns)
+
+  return re.test(pattern) ? `${player.toUpperCase()} wins!` : false
+}
+
+  checkForTie (pattern) {
+    return false
+  }
+
+  checkForWinOrTie (squares, player) {
+    let pattern = Array.prototype.map.call(squares, (square) => {
+      return square.innerText === '' ? '-' : square.innerText
+    }).join('').toLowerCase()
+
+    return this.checkForWin(player, pattern) || this.checkForTie(pattern)
+  }
+
   move (oldSquare) {
     let boardElem = oldSquare.parentElement
     let square = Array.prototype.indexOf.call(boardElem.children, oldSquare)
+    let player = this.getPlayer()
     let newSquare = this.playSquare(square, this.getPlayer())
 
     boardElem.replaceChild(newSquare, oldSquare)
-    return this.checkForWin()
+    return this.checkForWinOrTie(boardElem.children, player)
   }
 
   render () {
